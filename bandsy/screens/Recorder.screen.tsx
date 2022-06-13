@@ -31,8 +31,8 @@ const RecorderScreen: React.FC = () => {
   };
 
   const stopRecording = async () => {
-    setRecordings(undefined);
-    await recordings.stopAndUnloadAsync();
+    setIsRecording(undefined);
+    await recording.stopAndUnloadAsync();
 
     let updatedRecordings = [...recordings];
   };
