@@ -36,6 +36,7 @@ import { useAppContext } from '../utils/App.provider';
 import LinkingConfiguration from './LinkingConfiguration';
 import { JamGroup } from '../screens/JamGroups.screen';
 import SelectJamGroupModal from '../screens/SelectJamGroup.modal';
+import RecorderScreen from '../screens/Recorder.screen';
 
 export default function Navigation({
   colorScheme,
@@ -75,9 +76,11 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Group>
+        {/*screenOptions={{ presentation: 'modal' }} */}
         <Stack.Screen name="UserInfoForm" component={UserInfoFormModal} />
         <Stack.Screen name="SelectJamGroup" component={SelectJamGroupModal} />
+        <Stack.Screen name="Recorder" component={RecorderScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

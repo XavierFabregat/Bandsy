@@ -20,6 +20,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   SelectJamGroup: undefined;
   UserInfoForm: undefined;
+  Recorder: undefined;
   NotFound: undefined;
 };
 

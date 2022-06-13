@@ -64,7 +64,7 @@ export const Login: React.FC = () => {
         <TextInput
           style={styles.input}
           onChangeText={value => setPassword(value)}
-          secureTextEntry={isVisible ? true : false}
+          secureTextEntry={isVisible ? false : true}
         />
         <Pressable
           onPress={() => setIsVisible(!isVisible)}
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
   },
   showHidePwd: {
     position: 'absolute',
-    right: 15,
+    right: 20,
   },
 });

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { userWithInfo } from '../Types';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { EvilIcons } from '@expo/vector-icons';
 // import { ProfileStackParamList } from '../screens/Profile.screen';
 import { logout } from '../services/logServices';
 import { useAppContext } from '../utils/App.provider';
 import Colors from '../constants/Colors';
-
+import { Audio } from 'expo-av';
 type userInfoDisplayProps = {
   user: userWithInfo;
 };
@@ -18,8 +18,10 @@ type userInfoDisplayProps = {
 // >;
 
 export const ProfileScreen: React.FC<userInfoDisplayProps> = ({ user }) => {
+  const [audio, setAudio] = useState<any>(undefined);
   const navigation = useNavigation<any>();
   const appContext = useAppContext();
+  const route = useRoute<any>();
 
   function handlePress() {
     navigation.navigate('UserInfoForm', user);
@@ -38,6 +40,19 @@ export const ProfileScreen: React.FC<userInfoDisplayProps> = ({ user }) => {
       .catch(error => console.log(error));
   };
 
+  useEffect(() => {
+    if (route.params) {
+      setAudio(route.params);
+    }
+  });
+
+  const playSound = async (audio: any) => {
+    console.log('ahwadsnfi');
+    const sound = new Audio.Sound();
+    await sound.loadAsync({ uri: audio.file });
+    await sound.replayAsync();
+  };
+
   return (
     <View style={styles.infoContainer}>
       <View>
@@ -51,8 +66,8 @@ export const ProfileScreen: React.FC<userInfoDisplayProps> = ({ user }) => {
             style={styles.instrument}>{`\u2022 ${instrument}`}</Text>
         ))}
       </View>
-      <Pressable onPress={() => console.log('play')}>
-        <Text>Add play icon for sample here</Text>
+      <Pressable onPress={audio ? () => playSound(audio) : null}>
+        <EvilIcons name="play" size={150} color={Colors.light.tint} />
       </Pressable>
       <View style={styles.bottomButtonBasket}>
         <Pressable onPress={handleLogout} style={styles.logOut}>

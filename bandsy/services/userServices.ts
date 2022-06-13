@@ -29,8 +29,23 @@ export const getUserById = async (id: string) => {
   }
 };
 
+// export const postUserSample = async (id: string, sample: string) => {
+//   try {
+//     const response = await fetch(`${baseURL}/sample/${id}`, {
+//       method: 'PUT',
+//       credentials: 'include',
+//       body: JSON.stringify(sample),
+//       headers: { 'Content-Type': 'application/json' },
+//     });
+//     return await response.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const editUserById = async (user: userWithInfo) => {
   try {
+    console.log(user.id);
     const userUpd = await fetch(`${baseURL}/${user.id}`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
