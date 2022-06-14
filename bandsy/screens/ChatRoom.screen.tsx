@@ -1,11 +1,18 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, FlatList, Text, ImageBackground } from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  Text,
+  ImageBackground,
+  View,
+} from 'react-native';
 import InputBox from '../components/InputBox';
 import ChatMessage from '../components/ChatMessage';
 import { Message } from '../types';
 import { getAllGroupMessages } from '../services/messageServices';
 import io from 'socket.io-client';
+import { scrollTo } from 'react-native-reanimated';
 
 const imageSrc = require('../assets/images/chatBackground.png');
 
@@ -14,7 +21,7 @@ const ChatRoomScreen: React.FC = () => {
   const jamGroup = route.params;
   const [messages, setMessages] = React.useState<Message[]>([]);
   const socketRef = useRef<any>();
-
+  const bottom = useRef();
   const fetchMessagesForThisGroup = async () => {
     const messagesForThisGroup = await getAllGroupMessages(jamGroup.id);
     setMessages(messagesForThisGroup);
@@ -37,6 +44,8 @@ const ChatRoomScreen: React.FC = () => {
         setMessages([...messages, message]);
       }
     });
+    // bottom.current?.scrollTo({ x: 0, y: 0 });
+    // scrollTo(bottom, 0, 0, true);
     return () => {
       socketRef.current.disconnect();
     };
@@ -53,6 +62,7 @@ const ChatRoomScreen: React.FC = () => {
       ) : (
         <Text>No messages yet</Text>
       )}
+      <View ref={bottom}></View>
       <InputBox jamGroup={jamGroup} setMessages={setMessages} />
     </ImageBackground>
   );

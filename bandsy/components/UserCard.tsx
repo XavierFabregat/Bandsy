@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { userWithInfo } from '../Types';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../constants/Colors';
+import { EvilIcons } from '@expo/vector-icons';
 
 type UserCardProps = {
   user: userWithInfo;
@@ -21,7 +22,7 @@ export const UserCard: React.FC<UserCardProps> = ({ user }) => {
       <Text style={styles.name}>{user.name.split(' ')[0]}</Text>
       <Text style={styles.instrument}>Instruments:{user.instruments}</Text>
       <Pressable style={styles.sampleButton}>
-        <Text>Play Sample</Text>
+        <EvilIcons name="play" size={70} color={Colors.light.background} />
       </Pressable>
       <View style={styles.buttonContainer}>
         <Pressable style={styles.button}>
