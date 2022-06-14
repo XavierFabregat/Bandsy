@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from '../screens/LogIn.screen';
 import { Register } from '../screens/Register.screen';
 import { NavigationContainer } from '@react-navigation/native';
+import Colors from '../constants/Colors';
 
 export type SignInStackParamList = {
   Login: undefined;

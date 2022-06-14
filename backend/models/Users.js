@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const JamGroups = require('./JamGroups');
 
 const Users = sequelize.define(
   'users',
@@ -30,7 +31,7 @@ const Users = sequelize.define(
       default: [],
     },
     location: {
-      type: DataTypes.GEOMETRY('POINT', 4326),
+      type: DataTypes.TEXT,
     },
     sample: {
       type: DataTypes.TEXT,

@@ -15,19 +15,26 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Profile: {
             screens: {
               TabOneScreen: 'one',
             },
           },
-          TabTwo: {
+          Home: {
             screens: {
               TabTwoScreen: 'two',
             },
           },
+          JamGroups: {
+            screens: {
+              ChatRoom: 'three',
+            },
+          },
         },
       },
-      Modal: 'modal',
+      UserInfoForm: 'modal',
+      SelectJamGroup: 'modal',
+      Recorder: 'modal',
       NotFound: '*',
     },
   },

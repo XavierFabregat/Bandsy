@@ -1,6 +1,6 @@
 import { jamGroup, jamGroupToCreate } from '../Types';
 
-const baseURL = 'http://192.168.1.124:3030/jamgroup';
+const baseURL = 'http://192.168.1.131:3030/jamgroup';
 
 export const createJamGroup = async (
   newJamGroup: jamGroupToCreate,

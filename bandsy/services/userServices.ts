@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.1.124:3030/user';
+const baseURL = 'http://192.168.1.131:3030/user';
 import { userToCreate, userWithInfo } from '../Types';
 
 export const createUser = async (user: userToCreate) => {

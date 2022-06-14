@@ -54,7 +54,6 @@ export type userToLogin = {
 export type userWithInfo = {
   id: string;
   name: string;
-  hashpassword: string;
   jamgroups: string[];
   instruments: string[];
   location?: string;
@@ -80,14 +79,15 @@ export type errorMessage = {
 
 export type Message = {
   id: string;
-  authorid: string;
+  userId: string;
   jamgroupid: string;
   content: string;
   timestamp: number;
+  user: userWithInfo;
 };
 
 export type MessageToPost = {
-  authorid: string;
+  userId: string;
   jamgroupid: string;
   content: string;
   timestamp: number;

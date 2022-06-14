@@ -30,18 +30,18 @@ const InputBox: React.FC<InputBoxProps> = ({ jamGroup, setMessages }) => {
   const onSendPress = async () => {
     console.log('Sending: ', message);
     const messageToSend: MessageToPost = {
-      authorid: appContext.sessionToken,
+      userId: appContext.sessionToken,
       jamgroupid: jamGroup.id,
       content: message,
       timestamp: Date.now(),
     };
     const messageCreated = await postMessageToGroup(messageToSend);
-    setMessages(prevState => {
-      const newState = [...prevState, messageCreated];
-      return newState;
-    });
-    console.log(messageCreated);
-    socketRef.current = io('http://192.168.1.124:3030');
+    // setMessages(prevState => {
+    //   const newState = [...prevState, messageCreated];
+    //   return newState;
+    // });
+    console.log(messageCreated, 'input box');
+    socketRef.current = io('http://192.168.1.131:3030');
     socketRef.current.emit('message', messageCreated);
     setMessage('');
   };

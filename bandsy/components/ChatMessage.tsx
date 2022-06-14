@@ -13,10 +13,17 @@ export type ChatMessageProps = {
 };
 
 const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+  const [date, setDate] = React.useState<Date>();
   const appContext = useAppContext();
   const isMyMessage = () => {
-    return message.authorid === appContext.sessionToken;
+    return message.userId === appContext.sessionToken;
   };
+
+  React.useEffect(() => {
+    var dateNotFormatted = new Date(Number(message.timestamp));
+    setDate(dateNotFormatted);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View
@@ -31,14 +38,14 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
             ? { borderBottomRightRadius: 0 }
             : { borderBottomLeftRadius: 0 },
         ]}>
-        {!isMyMessage() && <Text style={styles.name}>{message.authorid}</Text>}
+        {!isMyMessage() && <Text style={styles.name}>{message.user.name}</Text>}
         <Text style={styles.message}>{message.content}</Text>
         <Text
           style={[
             styles.time,
             isMyMessage() ? null : { alignSelf: 'flex-end' },
           ]}>
-          {moment(message.timestamp).format('HH:MM')}
+          {moment(date).format('HH:MM A')}
         </Text>
       </View>
     </View>
@@ -64,6 +71,7 @@ const styles = StyleSheet.create({
   time: {
     fontWeight: '100',
     fontSize: 12,
+    marginTop: 10,
   },
 });
 

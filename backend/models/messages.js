@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const JamGroup = require('./JamGroups');
+const Users = require('./Users');
 
 const Messages = sequelize.define(
   'messages',
@@ -17,7 +19,7 @@ const Messages = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    authorid: {
+    userId: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

@@ -6,6 +6,7 @@ import ChatMessage from '../components/ChatMessage';
 import { Message } from '../types';
 import { getAllGroupMessages } from '../services/messageServices';
 import io from 'socket.io-client';
+
 const imageSrc = require('../assets/images/chatBackground.png');
 
 const ChatRoomScreen: React.FC = () => {
@@ -24,9 +25,17 @@ const ChatRoomScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    socketRef.current = io('http://192.168.1.124:3030');
+    socketRef.current = io('http://192.168.1.131:3030');
     socketRef.current.on('message', (message: Message) => {
-      setMessages([...messages, message]);
+      console.log(
+        'message jam id : ',
+        message.jamgroupid,
+        'this jam id : ',
+        jamGroup.id,
+      );
+      if (message.jamgroupid === jamGroup.id) {
+        setMessages([...messages, message]);
+      }
     });
     return () => {
       socketRef.current.disconnect();
@@ -38,6 +47,7 @@ const ChatRoomScreen: React.FC = () => {
       {messages ? (
         <FlatList
           data={messages}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => <ChatMessage message={item} />}
         />
       ) : (

@@ -1,7 +1,8 @@
-const baseURL = 'http://192.168.1.124:3030';
+const baseURL = 'http://192.168.1.131:3030';
 import { userToLogin } from '../Types';
 
 export const loginUser = async (user: userToLogin) => {
+  console.log('hello');
   try {
     const response = await fetch(baseURL + '/login', {
       method: 'POST',

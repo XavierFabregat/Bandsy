@@ -77,6 +77,9 @@ function RootNavigator() {
         component={ChatRoomScreen}
         options={({ route }) => ({
           title: route.params?.name,
+          headerStyle: {
+            backgroundColor: Colors.light.tint,
+          },
         })}
       />
       <Stack.Screen
@@ -86,9 +89,33 @@ function RootNavigator() {
       />
       <Stack.Group>
         {/*screenOptions={{ presentation: 'modal' }} */}
-        <Stack.Screen name="UserInfoForm" component={UserInfoFormModal} />
-        <Stack.Screen name="SelectJamGroup" component={SelectJamGroupModal} />
-        <Stack.Screen name="Recorder" component={RecorderScreen} />
+        <Stack.Screen
+          name="UserInfoForm"
+          component={UserInfoFormModal}
+          options={{
+            headerStyle: {
+              backgroundColor: Colors.light.tint,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SelectJamGroup"
+          component={SelectJamGroupModal}
+          options={{
+            headerStyle: {
+              backgroundColor: Colors.light.tint,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Recorder"
+          component={RecorderScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: Colors.light.tint,
+            },
+          }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

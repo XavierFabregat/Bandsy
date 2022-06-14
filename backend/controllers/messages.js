@@ -1,18 +1,21 @@
 const Messages = require('../models/messages');
 const { v4: uuid } = require('uuid');
+const Users = require('../models/Users');
 
 exports.postMessageToGroup = async (req, res) => {
   try {
-    const { content, authorid, timestamp, jamgroupid } = req.body;
+    const { content, userId, timestamp, jamgroupid } = req.body;
     const message = {
       id: uuid(),
       content,
-      authorid,
+      userId,
       timestamp,
       jamgroupid,
     };
-    console.log(message);
     const messageCreated = await Messages.create(message);
+    messageCreated.dataValues.user = await Users.findOne({
+      where: { id: userId },
+    });
     res.status(201);
     res.send(messageCreated);
   } catch (error) {
@@ -28,6 +31,21 @@ exports.getGroupMessagesById = async (req, res) => {
       order: [['timestamp', 'ASC']],
     });
     if (messagesOfGroup) {
+      for (let i = 0; i < messagesOfGroup.length; i++) {
+        const userData = await Users.findOne({
+          where: { id: messagesOfGroup[i].userId },
+        });
+        let userToReturn = {
+          name: userData.dataValues.name,
+          id: userData.dataValues.id,
+          jamgroups: userData.dataValues.jamgroups,
+          email: userData.dataValues.email,
+          instruments: userData.dataValues.instruments,
+          location: userData.dataValues.location,
+          sample: userData.dataValues.sample,
+        };
+        messagesOfGroup[i].dataValues.user = userToReturn;
+      }
       res.status(200);
       res.send(messagesOfGroup);
     } else {

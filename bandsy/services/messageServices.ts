@@ -1,6 +1,6 @@
 import { Message, MessageToPost } from '../types';
 
-const baseURL = 'http://192.168.1.124:3030/messages';
+const baseURL = 'http://192.168.1.131:3030/messages';
 
 export const postMessageToGroup = async (
   message: MessageToPost,

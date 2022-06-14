@@ -17,7 +17,6 @@ export const UserInfoFormModal: React.FC = () => {
         name: route.params.name,
         location: route.params.location,
         instruments: route.params.instruments,
-        hashpassword: route.params.hashpassword,
         jamgroups: route.params.jamgroups,
         sample: route.params.sample,
       };
@@ -41,7 +40,6 @@ export const UserInfoFormModal: React.FC = () => {
       const userUpdatedInfo: userWithInfo = {
         id: user.id,
         name: name || user.name,
-        hashpassword: user.hashpassword,
         location: location || user.location,
         jamgroups: user.jamgroups,
         sample: sample || user.sample,

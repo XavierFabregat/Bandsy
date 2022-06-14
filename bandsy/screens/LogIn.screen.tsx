@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginVertical: 90,
     alignItems: 'center',
+    flex: 1,
   },
   valid: {
     display: 'none',
@@ -115,11 +116,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   logo: {
-    height: 80,
-    width: 160,
+    height: '25%',
+    width: '70%',
     alignSelf: 'center',
     marginBottom: 40,
-    borderRadius: 30,
+    borderRadius: 20,
   },
   register: {
     marginTop: 30,

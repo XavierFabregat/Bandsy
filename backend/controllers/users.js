@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 const { Op } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { dirname } = require('path');
 
 exports.createUser = async (req, res) => {
   try {
@@ -18,7 +17,7 @@ exports.createUser = async (req, res) => {
     };
     const user = await Users.create(body);
     res.status(201);
-    res.send(user);
+    res.send('User created successfully!');
   } catch (error) {
     console.log('Internal server error: ', error);
     res.status(500);
@@ -32,8 +31,17 @@ exports.getUserById = async (req, res) => {
         id: req.params['id'],
       },
     });
+    const userToReturn = {
+      name: user.name,
+      id: user.id,
+      jamgroups: user.jamgroups,
+      email: user.email,
+      instruments: user.instruments,
+      location: user.location,
+      sample: user.sample,
+    };
     res.status(200);
-    res.send(user);
+    res.send(userToReturn);
   } catch (error) {
     console.log('Internal server error: ', error);
     res.status(500);
@@ -74,8 +82,17 @@ exports.editUserById = async (req, res) => {
         id: req.params['id'],
       },
     });
+    const userToReturn = {
+      name: userUpd.name,
+      id: userUpd.id,
+      jamgroups: userUpd.jamgroups,
+      email: userUpd.email,
+      instruments: userUpd.instruments,
+      location: userUpd.location,
+      sample: userUpd.sample,
+    };
     res.status(200);
-    res.send(userUpd);
+    res.send(userToReturn);
   } catch (error) {
     console.log('Internal server error: ', error);
     res.status(500);
@@ -119,8 +136,20 @@ exports.getOtherUsers = async (req, res) => {
       res.status(400);
       res.send({ error, message: "Haven't found other users." });
     } else {
+      const otherUsersToReturn = [];
+      for (let i = 0; i < otherUsers.length; i++) {
+        otherUsersToReturn[i] = {
+          name: otherUsers[i].name,
+          id: otherUsers[i].id,
+          jamgroups: otherUsers[i].jamgroups,
+          email: otherUsers[i].email,
+          instruments: otherUsers[i].instruments,
+          location: otherUsers[i].location,
+          sample: otherUsers[i].sample,
+        };
+      }
       res.status(200);
-      res.send(otherUsers);
+      res.send(otherUsersToReturn);
     }
   } catch (error) {
     console.log('Internal server error: ', error);
