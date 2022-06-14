@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userController = require('./controllers/users');
 const jamGroupController = require('./controllers/jamgoups');
+const messagesController = require('./controllers/messages');
 const authMiddleware = require('./middleware/auth');
 
 router.post('/user', userController.createUser);
@@ -24,5 +25,11 @@ router.get(
   '/jamgroup/admin/:id',
   authMiddleware,
   jamGroupController.getJamGroupsOfWhichIAmAdmin,
+);
+router.post('/messages', authMiddleware, messagesController.postMessageToGroup);
+router.get(
+  '/messages/:id',
+  authMiddleware,
+  messagesController.getGroupMessagesById,
 );
 module.exports = router;

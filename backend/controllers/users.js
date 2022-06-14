@@ -2,6 +2,9 @@ const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { Op } = require('sequelize');
+const fs = require('fs');
+const path = require('path');
+const { dirname } = require('path');
 
 exports.createUser = async (req, res) => {
   try {
@@ -44,12 +47,28 @@ exports.editUserById = async (req, res) => {
         id: req.params['id'],
       },
     });
+    if (!user) {
+      console.log('User not found');
+      res.status(400);
+      res.send({ errorMessage: 'User not found!' });
+    }
     await user.update({
       name: req.body.name,
       // location: req.body.location,
       instruments: req.body.instruments,
-      // sample: req.body.sample,
+      sample: req.body.sample,
     });
+    fs.writeFile(
+      path.normalize(__dirname + `/../samples/${user.id}.sample.m4a`),
+      JSON.stringify(req.body.sample),
+      error => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('File written successfully!');
+        }
+      },
+    );
     const userUpd = await Users.findOne({
       where: {
         id: req.params['id'],
