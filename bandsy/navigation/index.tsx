@@ -37,6 +37,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { JamGroup } from '../screens/JamGroups.screen';
 import SelectJamGroupModal from '../screens/SelectJamGroup.modal';
 import RecorderScreen from '../screens/Recorder.screen';
+import ChatRoomScreen from '../screens/ChatRoom.screen';
 
 export default function Navigation({
   colorScheme,
@@ -70,6 +71,13 @@ function RootNavigator() {
           headerStyle: { backgroundColor: Colors.light.tint },
           headerTintColor: Colors.light.background,
         }}
+      />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={({ route }) => ({
+          title: route.params?.name,
+        })}
       />
       <Stack.Screen
         name="NotFound"

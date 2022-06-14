@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { jamGroup } from '../Types';
 
 type JamChatCardProps = {
@@ -7,11 +8,15 @@ type JamChatCardProps = {
 };
 
 export const JamChatCard: React.FC<JamChatCardProps> = ({ chat }) => {
+  const navigation = useNavigation<any>();
+  const handleNavigation = () => {
+    navigation.navigate('ChatRoom', chat);
+  };
   return (
-    <View style={styles.chatCardContainer}>
+    <Pressable style={styles.chatCardContainer} onPress={handleNavigation}>
       <Text>{chat.name}</Text>
       <Text>Number of members: {chat.users.length}</Text>
-    </View>
+    </Pressable>
   );
 };
 

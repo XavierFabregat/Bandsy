@@ -22,6 +22,7 @@ export type RootStackParamList = {
   UserInfoForm: undefined;
   Recorder: undefined;
   NotFound: undefined;
+  ChatRoom: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -75,4 +76,19 @@ export type jamGroup = {
 export type errorMessage = {
   error: any;
   message: string;
+};
+
+export type Message = {
+  id: string;
+  authorid: string;
+  jamgroupid: string;
+  content: string;
+  timestamp: number;
+};
+
+export type MessageToPost = {
+  authorid: string;
+  jamgroupid: string;
+  content: string;
+  timestamp: number;
 };
