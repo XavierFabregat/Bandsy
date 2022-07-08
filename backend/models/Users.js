@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
-const JamGroups = require('./JamGroups');
 
 const Users = sequelize.define(
   'users',

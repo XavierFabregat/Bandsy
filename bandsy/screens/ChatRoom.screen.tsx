@@ -21,7 +21,7 @@ const ChatRoomScreen: React.FC = () => {
   const jamGroup = route.params;
   const [messages, setMessages] = React.useState<Message[]>([]);
   const socketRef = useRef<any>();
-  const bottom = useRef();
+  const bottom = useRef<any>();
   const fetchMessagesForThisGroup = async () => {
     const messagesForThisGroup = await getAllGroupMessages(jamGroup.id);
     setMessages(messagesForThisGroup);

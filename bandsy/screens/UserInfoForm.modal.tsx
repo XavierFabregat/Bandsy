@@ -30,13 +30,13 @@ export const UserInfoFormModal: React.FC = () => {
   const navigation = useNavigation<any>();
 
   async function handlePress() {
-    console.log(validateForm());
+    // console.log(validateForm());
     if (validateForm()) {
       if (audio) {
         const audioFile = await readAsStringAsync(audio.file);
         setSample(audioFile);
       }
-      console.log(user);
+      // console.log(user);
       const userUpdatedInfo: userWithInfo = {
         id: user.id,
         name: name || user.name,
@@ -46,7 +46,7 @@ export const UserInfoFormModal: React.FC = () => {
         instruments: instruments[0] ? instruments : user.instruments,
       };
       const updatedUser = await editUserById(userUpdatedInfo);
-      console.log(updatedUser);
+      // console.log(updatedUser);
       navigation.navigate('Profile', audio);
     }
   }

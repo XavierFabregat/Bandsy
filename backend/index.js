@@ -6,7 +6,7 @@ const session = require('express-session');
 const cors = require('cors');
 const router = require('./router');
 const sequelize = require('./models');
-require('dotenv').config('./env');
+require('dotenv').config('./.env');
 
 const app = Express();
 const http = require('http').Server(app);

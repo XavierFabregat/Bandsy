@@ -30,7 +30,6 @@ export const ProfileScreen: React.FC<userInfoDisplayProps> = ({ user }) => {
   const handleLogout = async () => {
     logout()
       .then(res => {
-        console.log(res, 'userinfodisplay');
         if (res.error) {
           console.log(res.message);
         } else {
@@ -47,7 +46,6 @@ export const ProfileScreen: React.FC<userInfoDisplayProps> = ({ user }) => {
   });
 
   const playSound = async (audio: any) => {
-    console.log('ahwadsnfi');
     const sound = new Audio.Sound();
     await sound.loadAsync({ uri: audio.file });
     await sound.replayAsync();
